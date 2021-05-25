@@ -1,0 +1,34 @@
+#quiz {
+    border: #000 2 px solid;
+    padding: 20px 80px 80px 80px;
+}
+
+.Container {
+    background-color: palevioletred;
+    text-decoration: papayawhip;
+}
+
+.button {
+    background-color: powderblue;
+    border: seashell;
+    color: white;
+    padding: 12px 40px;
+    text-align: center;
+    display: inline-block;
+    font-size: 22px;
+}
+
+#score {
+    color: papayawhip;
+    background-color: palevioletred;
+    text-align: center;
+}
+
+h1 {
+    text-align: center;
+    color: powderblue;
+}
+
+button onlick {
+    text-align: center;
+}
