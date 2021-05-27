@@ -1,24 +1,30 @@
-  
+var startButton = document.querySelector(".start");
 var quizNumber = 0, quiz, score, question, choice, choices, selectA, selectB, selectC, selectD, correct =0;
+var seconds = 60;
 var questions = [
     ["What does a callback function do?","observes an event", "creates GIT issues","passes a function as an argument into a function","nothing","C"],
     ["What does DOM stand for?","Drastic Object Modal","Decided Object Model","Determined Object Modal","Document Object Model","D"],
     ["Which is an API for CSS?","Bootspurs","Bootstrap","Kanbon Board","jQuery","B"],
     ["What is legacy code?","adopted code base you didn't write","code you use everyday","a coder's nightmare","Your favorite code","A"]
 ];
+startButton.addEventListener("click", function(){
+    document.querySelector(".container").setAttribute("style", "display: none;");
+    askQuestion();
+    countdown(2);
+});
+
 function _(x) {
 return document.getElementById(x);
 }
 function askQuestion() {
-quiz = _("quiz");
 var score=_("score")
 if (quizNumber >= questions.length) {
-    quiz.innerHTML = "<h2>You got "+correct+ "of "+question.length+" question right</h2>";
-    _("score").innerHTML = "Test Complete";
     quizNumber=0;
     correct = 0;
+    var counter = document.getElementById("counter");
+    counter.innerHTML = "";
+    quizEnd();
     return false;
-    
 }
 _("score").innerHTML = "Question "+(quizNumber)+"of "+questions; question = questions[quizNumber] [0];
 selectA = questions[quizNumber][1];
@@ -32,7 +38,7 @@ score.innerHTML += "<input type='radio' name='choices' value='B'> "+selectB+"<br
 score.innerHTML += "<input type='radio' name='choices' value='C'> "+selectC+"<br>";
 score.innerHTML += "<input type='radio' name='choices' value='D'> "+selectD+"<br>";
 
-
+_("score").innerHTML+= "<button onclick='checkAnswer()'>Submit</button>";    
 
 }
 function checkAnswer(){
@@ -44,13 +50,14 @@ for(var i=0; i<choices.length; i++) {
 }
 if(choice == questions[quizNumber] [5]) {
     correct++;
-
 } 
+else{
+    seconds -= 10;    
+}
 quizNumber++;
 askQuestion()
-
+}
 function countdown(minutes) {
-    var seconds = 60;
     var mins = minutes
     function tick() {
          
@@ -68,10 +75,11 @@ function countdown(minutes) {
     }
     tick();
 }
+function quizEnd() {
+    quiz = _("quiz");
+    quiz.innerHTML = "<h2>You got "+correct+ "of "+questions.length+" question right</h2>";
+    _("quiz").innerHTML += "Test Complete";
+    _("quiz").innerHTML += "<input/><button onclick='submitHighScores()'>Submit</button>";
+    // _("quiz").innerHTML+= "<button onclick='checkAnswer()'>Submit</button>"; 
+    // write local storage in submitHigh Scores function - array, loop through array to display scores// 
 }
-_("quiz").innerHTML+= "<button onclick='checkAnswer()'>Submit</button>";
-
-
-
-
-window.addEventListener("load", askQuestion, false);
