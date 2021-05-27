@@ -1,6 +1,6 @@
   
-var quizNumber = 0, quiz, quizScore, question, choice, choices, selectA, selectB, selectC, selectD, correct =0;
-var question = [
+var quizNumber = 0, quiz, score, question, choice, choices, selectA, selectB, selectC, selectD, correct =0;
+var questions = [
     ["What does a callback function do?","observes an event", "creates GIT issues","passes a function as an argument into a function","nothing","C"],
     ["What does DOM stand for?","Drastic Object Modal","Decided Object Model","Determined Object Modal","Document Object Model","D"],
     ["Which is an API for CSS?","Bootspurs","Bootstrap","Kanbon Board","jQuery","B"],
@@ -11,26 +11,26 @@ return document.getElementById(x);
 }
 function askQuestion() {
 quiz = _("quiz");
-var quizScore=_("quizScore")
-if (quizNumber >= question.length) {
+var score=_("score")
+if (quizNumber >= questions.length) {
     quiz.innerHTML = "<h2>You got "+correct+ "of "+question.length+" question right</h2>";
-    _("quizScore").innerHTML = "Test Complete";
+    _("score").innerHTML = "Test Complete";
     quizNumber=0;
     correct = 0;
     return false;
     
 }
-_("quizScore").innerHTML = "Question "+(quizNumber)+"of "+question; question = question[quizNumber] [0];
-selectA = question[quizNumber][1];
-selectB = question[quizNumber][2];
-selectC = question[quizNumber][3];
-selectD = question[quizNumber][4];
+_("score").innerHTML = "Question "+(quizNumber)+"of "+questions; question = questions[quizNumber] [0];
+selectA = questions[quizNumber][1];
+selectB = questions[quizNumber][2];
+selectC = questions[quizNumber][3];
+selectD = questions[quizNumber][4];
 
-quizScore.innerHTML = "<h3>"+question+"</h3>";
-quizScore.innerHTML += "<input type='radio' name='choices' value='A'> "+selectA+"<br>";
-quizScore.innerHTML += "<input type='radio' name='choices' value='B'> "+selectB+"<br>";
-quizScore.innerHTML += "<input type='radio' name='choices' value='C'> "+selectC+"<br>";
-quizScore.innerHTML += "<input type='radio' name='choices' value='D'> "+selectD+"<br>";
+score.innerHTML = "<h3>"+question+"</h3>";
+score.innerHTML += "<input type='radio' name='choices' value='A'> "+selectA+"<br>";
+score.innerHTML += "<input type='radio' name='choices' value='B'> "+selectB+"<br>";
+score.innerHTML += "<input type='radio' name='choices' value='C'> "+selectC+"<br>";
+score.innerHTML += "<input type='radio' name='choices' value='D'> "+selectD+"<br>";
 
 
 
@@ -42,7 +42,7 @@ for(var i=0; i<choices.length; i++) {
         choice=choices[i].value;
     }
 }
-if(choice == question[quizNumber] [5]) {
+if(choice == questions[quizNumber] [5]) {
     correct++;
 
 } 
