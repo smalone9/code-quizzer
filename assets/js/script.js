@@ -1,3 +1,5 @@
+// page setup
+var counter = document.querySelector("#counter");
 var startButton = document.querySelector(".start");
 var quizNumber = 0,
   quiz,
@@ -10,7 +12,10 @@ var quizNumber = 0,
   selectC,
   selectD,
   correct = 0;
-var seconds = 60;
+var submitHighScore = document.querySelector(".submitHighScore");
+var countdown;
+var timeLeft = 100;
+// questions
 var questions = [
   [
     "What does a callback function do?",
@@ -45,12 +50,13 @@ var questions = [
     "A",
   ],
 ];
+// start button
 startButton.addEventListener("click", function () {
   document.querySelector(".container").setAttribute("style", "display: none;");
   askQuestion();
   countdown(2);
 });
-
+// questions continued
 function _(x) {
   return document.getElementById(x);
 }
@@ -83,6 +89,7 @@ function askQuestion() {
 
   _("score").innerHTML += "<button onclick='checkAnswer()'>Submit</button>";
 }
+// check score and deduct time
 function checkAnswer() {
   choices = document.getElementsByName("choices");
   for (var i = 0; i < choices.length; i++) {
@@ -97,7 +104,11 @@ function checkAnswer() {
   }
   quizNumber++;
   askQuestion();
+  if (index === questions.length) {
+    return quizEnd();
+  }
 }
+// simplify timer
 function countdown(minutes) {
   var mins = minutes;
   function tick() {
@@ -119,30 +130,37 @@ function countdown(minutes) {
   }
   tick();
 }
+function timer() {
+    timer = setInterval(function(){
+        timeLeft--;
+        counter.textContent = timeLeft;
+    })
+}
+// end quiz and save high scores
 function quizEnd() {
-//   quiz = _("quiz");
-//   quiz.innerHTML =
-//     "<h2>You got " +
-//     correct +
-//     "of " +
-//     questions.length +
-//     " question right</h2>";
-//   _("quiz").innerHTML += "Test Complete";
-//   _("quiz").innerHTML +=
-//     "<input/><button onclick='submitHighScores()'>Submit</button>";
-  // _("quiz").innerHTML+= "<button onclick='checkAnswer()'>Submit</button>";
+  //   quiz = _("quiz");
+  //   quiz.innerHTML =
+  //     "<h2>You got " +
+  //     correct +
+  //     "of " +
+  //     questions.length +
+  //     " question right</h2>";
+  //   _("quiz").innerHTML += "Test Complete";
+  //   _("quiz").innerHTML +=
+  //     "<input/><button onclick='submitHighScores()'>Submit</button>";
+  //   _("quiz").innerHTML+= "<button onclick='checkAnswer()'>Submit</button>";
   // write local storage in submitHigh Scores function - array, loop through array to display scores//
 
   var playerName = prompt("Enter your Name");
   localStorage.setItem("Player Name", playerName);
 
-  localStorage.setItem("userScore", score);
+  localStorage.setItem("playerScore", score);
   clearInterval(countdown);
 
-  var score = function () {
+  function score() {
     score = JSON.stringify(localStorage.setItem("submitHighScores"));
 
-    // if nothing in localStorage, create a new object to track all task status arrays
+    // if nothing in localStorage, create a new object to track all task status arrays....attempt at this, but struggled
     // if (!score) {
     //   score = {
     //     firstPlace: [],
@@ -153,18 +171,18 @@ function quizEnd() {
     // }
 
     // loop over object properties
-    $.each(score, function (list, arr) {
-      console.log(list, arr);
-      // then loop over sub-array
-      arr.forEach(function (score) {
-        score(list);
-      });
-    });
+    //     $.each(score, function (list, arr) {
+    //       console.log(list, arr);
+    //       // then loop over sub-array
+    //       arr.forEach(function (score) {
+    //         score(list);
+    //       });
+    //     });
   };
-
-  var score = function () {
-    localStorage.setItem("submitHighScore", JSON.stringify(score));
-  };
+  // call function for score
+  score()
+  timer()
 }
+
 
 // fix: localStorage and stop timer after quiz ends
