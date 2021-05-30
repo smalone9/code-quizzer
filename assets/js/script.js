@@ -78,19 +78,18 @@ function quizEnd() {
     _("quiz").innerHTML += "<input/><button onclick='submitHighScores()'>Submit</button>";
     // _("quiz").innerHTML+= "<button onclick='checkAnswer()'>Submit</button>"; 
     // write local storage in submitHigh Scores function - array, loop through array to display scores// 
-} 
     var score = function() {
         score = JSON.parse(localStorage.getItem("submitHighScores"));
 
-        // if nothing in localStorage, create a new object to track all task status arrays
-        if (!score) {
-          score = {
-            firstPlace: [],
-            secondPlace: [],
-            thirdPlace: [],
-            fourthPlace: []
-          };
-        }
+        // // if nothing in localStorage, create a new object to track all task status arrays
+        // if (!score) {
+        //   score = {
+        //     firstPlace: [],
+        //     secondPlace: [],
+        //     thirdPlace: [],
+        //     fourthPlace: []
+        //   };
+        // }
 
         // loop over object properties
         $.each(score, function(list, arr) {
@@ -105,5 +104,7 @@ function quizEnd() {
     var saveTasks = function() {
         localStorage.setItem("submitHighScore", JSON.stringify(score));
       };
+}; 
+   
 
       // fix: localStorage and stop timer after quiz ends 
