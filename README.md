@@ -5,7 +5,7 @@
 Module 4, week 4, Web APIs Challenge: Code Quiz
 
 
-![Image of Code Quiz](./assets/images/screenshot)
+![Image of Code Quiz](./assets/css/images/screenshot.png)
 
 # Description 
 
